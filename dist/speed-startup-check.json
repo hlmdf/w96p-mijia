@@ -1,0 +1,32 @@
+[
+  {
+    "step": "baseline",
+    "power": 1,
+    "speed": 10
+  },
+  {
+    "step": "set 1",
+    "power": 1,
+    "speed": 1
+  },
+  {
+    "step": "off",
+    "power": 0,
+    "speed": 0
+  },
+  {
+    "step": "write 43 while off",
+    "power": 0,
+    "speed": 43
+  },
+  {
+    "step": "power on after staging 43",
+    "power": 1,
+    "speed": 10
+  },
+  {
+    "step": "restored",
+    "power": 1,
+    "speed": 10
+  }
+]

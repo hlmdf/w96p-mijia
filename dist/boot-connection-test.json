@@ -1,0 +1,150 @@
+{
+  "manual": [
+    {
+      "ip": "192.168.0.251",
+      "ble": false,
+      "cloud": true,
+      "configured": true,
+      "bleKeepAwake": false,
+      "bleAutoReconnect": false,
+      "bleReconnectAttempts": 2,
+      "uptimeMs": 53647,
+      "freeHeap": 75364
+    },
+    {
+      "ip": "192.168.0.251",
+      "ble": false,
+      "cloud": true,
+      "configured": true,
+      "bleKeepAwake": false,
+      "bleAutoReconnect": false,
+      "bleReconnectAttempts": 2,
+      "uptimeMs": 55712,
+      "freeHeap": 75144
+    },
+    {
+      "ip": "192.168.0.251",
+      "ble": false,
+      "cloud": true,
+      "configured": true,
+      "bleKeepAwake": false,
+      "bleAutoReconnect": false,
+      "bleReconnectAttempts": 2,
+      "uptimeMs": 57766,
+      "freeHeap": 74908
+    },
+    {
+      "ip": "192.168.0.251",
+      "ble": false,
+      "cloud": true,
+      "configured": true,
+      "bleKeepAwake": false,
+      "bleAutoReconnect": false,
+      "bleReconnectAttempts": 2,
+      "uptimeMs": 59793,
+      "freeHeap": 74684
+    },
+    {
+      "ip": "192.168.0.251",
+      "ble": false,
+      "cloud": true,
+      "configured": true,
+      "bleKeepAwake": false,
+      "bleAutoReconnect": false,
+      "bleReconnectAttempts": 2,
+      "uptimeMs": 61837,
+      "freeHeap": 74028
+    },
+    {
+      "ip": "192.168.0.251",
+      "ble": false,
+      "cloud": true,
+      "configured": true,
+      "bleKeepAwake": false,
+      "bleAutoReconnect": false,
+      "bleReconnectAttempts": 2,
+      "uptimeMs": 63892,
+      "freeHeap": 74260
+    }
+  ],
+  "boot": [
+    {
+      "ip": "192.168.0.251",
+      "ble": false,
+      "cloud": false,
+      "configured": true,
+      "bleKeepAwake": false,
+      "bleAutoReconnect": true,
+      "bleReconnectAttempts": 0,
+      "uptimeMs": 4179,
+      "freeHeap": 120928
+    },
+    {
+      "ip": "192.168.0.251",
+      "ble": false,
+      "cloud": false,
+      "configured": true,
+      "bleKeepAwake": false,
+      "bleAutoReconnect": true,
+      "bleReconnectAttempts": 0,
+      "uptimeMs": 5238,
+      "freeHeap": 120704
+    },
+    {
+      "ip": "192.168.0.251",
+      "ble": false,
+      "cloud": false,
+      "configured": true,
+      "bleKeepAwake": false,
+      "bleAutoReconnect": true,
+      "bleReconnectAttempts": 1,
+      "uptimeMs": 10494,
+      "freeHeap": 119764
+    },
+    {
+      "ip": "192.168.0.251",
+      "ble": true,
+      "cloud": false,
+      "configured": true,
+      "bleKeepAwake": false,
+      "bleAutoReconnect": true,
+      "bleReconnectAttempts": 1,
+      "uptimeMs": 11688,
+      "freeHeap": 122852
+    },
+    {
+      "ip": "192.168.0.251",
+      "ble": true,
+      "cloud": false,
+      "configured": true,
+      "bleKeepAwake": true,
+      "bleAutoReconnect": true,
+      "bleReconnectAttempts": 1,
+      "uptimeMs": 12739,
+      "freeHeap": 122484
+    },
+    {
+      "ip": "192.168.0.251",
+      "ble": true,
+      "cloud": false,
+      "configured": true,
+      "bleKeepAwake": true,
+      "bleAutoReconnect": true,
+      "bleReconnectAttempts": 1,
+      "uptimeMs": 13866,
+      "freeHeap": 122132
+    },
+    {
+      "ip": "192.168.0.251",
+      "ble": true,
+      "cloud": true,
+      "configured": true,
+      "bleKeepAwake": true,
+      "bleAutoReconnect": true,
+      "bleReconnectAttempts": 1,
+      "uptimeMs": 16614,
+      "freeHeap": 71036
+    }
+  ],
+  "pass": true
+}

@@ -1,0 +1,252 @@
+{
+  "timestamp": "2026-10-29 23:45:55",
+  "read": {
+    "fff1": "01",
+    "fff3": "0a",
+    "fffa": "01",
+    "fff2": "0000",
+    "fff4": "00",
+    "fff5": "012c",
+    "fff6": "00",
+    "fff7": "0a2b4664",
+    "fff8": "00c7",
+    "fffb": "0000",
+    "ffe3": "373028211c16151a212930363a3c3d3a342d251e18141921283035393c3c38332b241d17151c252f383f44474847433e362e241d17141b2530394045494a4c4e50525456585a5957534d463e352b221b15141a20262b2f3132302c26211b1814151a1f252a2e302f2a241f1b1714161b21272c2f302e29241e1a1714161b2126",
+    "ffc1": "52454144592c",
+    "ffd1": "0fe5013a0000465000000000000000000000ffff00000000000000000000",
+    "ffd2": "00000eb40000000001000000",
+    "ffd3": "0121000010b9"
+  },
+  "checks": [
+    {
+      "name": "connect",
+      "ok": true,
+      "result": true
+    },
+    {
+      "name": "read fff1",
+      "ok": true,
+      "result": "01"
+    },
+    {
+      "name": "read fff3",
+      "ok": true,
+      "result": "0a"
+    },
+    {
+      "name": "read fffa",
+      "ok": true,
+      "result": "01"
+    },
+    {
+      "name": "read fff2",
+      "ok": true,
+      "result": "0000"
+    },
+    {
+      "name": "read fff4",
+      "ok": true,
+      "result": "00"
+    },
+    {
+      "name": "read fff5",
+      "ok": true,
+      "result": "012c"
+    },
+    {
+      "name": "read fff6",
+      "ok": true,
+      "result": "00"
+    },
+    {
+      "name": "read fff7",
+      "ok": true,
+      "result": "0a2b4664"
+    },
+    {
+      "name": "read fff8",
+      "ok": true,
+      "result": "00c7"
+    },
+    {
+      "name": "read fffb",
+      "ok": true,
+      "result": "0000"
+    },
+    {
+      "name": "read ffe3",
+      "ok": true,
+      "result": "373028211c16151a212930363a3c3d3a342d251e18141921283035393c3c38332b241d17151c252f383f44474847433e362e241d17141b2530394045494a4c4e50525456585a5957534d463e352b221b15141a20262b2f3132302c26211b1814151a1f252a2e302f2a241f1b1714161b21272c2f302e29241e1a1714161b2126"
+    },
+    {
+      "name": "read ffc1",
+      "ok": true,
+      "result": "52454144592c"
+    },
+    {
+      "name": "read ffd1",
+      "ok": true,
+      "result": "0fe5013a0000465000000000000000000000ffff00000000000000000000"
+    },
+    {
+      "name": "read ffd2",
+      "ok": true,
+      "result": "00000eb40000000001000000"
+    },
+    {
+      "name": "read ffd3",
+      "ok": true,
+      "result": "0121000010b9"
+    },
+    {
+      "name": "device info",
+      "ok": false,
+      "error": "设备信息请求失败"
+    },
+    {
+      "name": "speed 11",
+      "ok": true,
+      "result": 11
+    },
+    {
+      "name": "speed 21",
+      "ok": true,
+      "result": 21
+    },
+    {
+      "name": "speed 10",
+      "ok": true,
+      "result": 10
+    },
+    {
+      "name": "light 1",
+      "ok": true,
+      "result": 1
+    },
+    {
+      "name": "light 2",
+      "ok": true,
+      "result": 2
+    },
+    {
+      "name": "light 3",
+      "ok": true,
+      "result": 3
+    },
+    {
+      "name": "light 4",
+      "ok": true,
+      "result": 4
+    },
+    {
+      "name": "light 0",
+      "ok": true,
+      "result": 0
+    },
+    {
+      "name": "timer 60 seconds",
+      "ok": true,
+      "result": 60
+    },
+    {
+      "name": "cancel timer",
+      "ok": true,
+      "result": "0000"
+    },
+    {
+      "name": "sleep 60 seconds",
+      "ok": true,
+      "result": 60
+    },
+    {
+      "name": "Turbo duration 2 seconds",
+      "ok": true,
+      "result": 2
+    },
+    {
+      "name": "Turbo on",
+      "ok": true,
+      "result": true
+    },
+    {
+      "name": "Turbo off",
+      "ok": true,
+      "result": true
+    },
+    {
+      "name": "nature on",
+      "ok": true,
+      "result": 1
+    },
+    {
+      "name": "nature off",
+      "ok": true,
+      "result": 0
+    },
+    {
+      "name": "gear calibration unchanged",
+      "ok": true,
+      "result": 4
+    },
+    {
+      "name": "128-point curve unchanged",
+      "ok": false,
+      "error": "write timed out"
+    },
+    {
+      "name": "restore Turbo off",
+      "ok": false,
+      "error": "C3 rejected command"
+    },
+    {
+      "name": "restore fff4",
+      "ok": true,
+      "result": true
+    },
+    {
+      "name": "restore fff8",
+      "ok": true,
+      "result": true
+    },
+    {
+      "name": "restore fff5",
+      "ok": true,
+      "result": true
+    },
+    {
+      "name": "restore fffa",
+      "ok": true,
+      "result": true
+    },
+    {
+      "name": "restore power",
+      "ok": true,
+      "result": true
+    },
+    {
+      "name": "restore exact speed",
+      "ok": true,
+      "result": true
+    },
+    {
+      "name": "restore timer",
+      "ok": true,
+      "result": true
+    },
+    {
+      "name": "final speed",
+      "ok": true,
+      "result": 10
+    },
+    {
+      "name": "final light",
+      "ok": true,
+      "result": 1
+    },
+    {
+      "name": "final power",
+      "ok": true,
+      "result": 1
+    }
+  ]
+}

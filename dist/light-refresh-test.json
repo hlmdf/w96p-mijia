@@ -1,0 +1,133 @@
+{
+  "samples": [
+    {
+      "seconds": 0.55,
+      "level": 4
+    },
+    {
+      "seconds": 4.95,
+      "level": 4
+    },
+    {
+      "seconds": 8.95,
+      "level": 4
+    },
+    {
+      "seconds": 12.8,
+      "level": 4
+    },
+    {
+      "seconds": 17.05,
+      "level": 4
+    },
+    {
+      "seconds": 20.9,
+      "level": 4
+    },
+    {
+      "seconds": 25.05,
+      "level": 4
+    },
+    {
+      "seconds": 29.2,
+      "level": 4
+    },
+    {
+      "seconds": 32.85,
+      "level": 4
+    },
+    {
+      "seconds": 36.5,
+      "level": 4
+    },
+    {
+      "seconds": 40.45,
+      "level": 4
+    },
+    {
+      "seconds": 44.3,
+      "level": 4
+    },
+    {
+      "seconds": 47.95,
+      "level": 4
+    },
+    {
+      "seconds": 51.85,
+      "level": 4
+    },
+    {
+      "seconds": 55.55,
+      "level": 4
+    },
+    {
+      "seconds": 59.3,
+      "level": 4
+    },
+    {
+      "seconds": 63.4,
+      "level": 4
+    },
+    {
+      "seconds": 67.8,
+      "level": 4
+    },
+    {
+      "seconds": 71.5,
+      "level": 4
+    },
+    {
+      "seconds": 75.4,
+      "level": 4
+    },
+    {
+      "seconds": 79.4,
+      "level": 4
+    },
+    {
+      "seconds": 83.1,
+      "level": 4
+    },
+    {
+      "seconds": 87.15,
+      "level": 4
+    },
+    {
+      "seconds": 91.0,
+      "level": 4
+    },
+    {
+      "seconds": 95.05,
+      "level": 4
+    },
+    {
+      "seconds": 98.7,
+      "level": 4
+    },
+    {
+      "seconds": 102.95,
+      "level": 4
+    },
+    {
+      "seconds": 106.6,
+      "level": 4
+    },
+    {
+      "seconds": 110.55,
+      "level": 4
+    },
+    {
+      "seconds": 114.45,
+      "level": 4
+    },
+    {
+      "seconds": 118.9,
+      "level": 4
+    }
+  ],
+  "originalLight": 1,
+  "originalPower": 0,
+  "originalSpeed": 0,
+  "finalPower": 0,
+  "finalSpeed": 0
+}

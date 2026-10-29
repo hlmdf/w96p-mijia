@@ -1,0 +1,141 @@
+{
+  "tests": [
+    {
+      "name": "remembered 1 / off / on + 43",
+      "pass": true,
+      "details": {
+        "speed": 43,
+        "targets": [
+          43
+        ]
+      }
+    },
+    {
+      "name": "percent then delayed companion on",
+      "pass": true,
+      "details": {
+        "speed": 10,
+        "targets": [
+          10
+        ]
+      }
+    },
+    {
+      "name": "standalone on remembers last speed",
+      "pass": true,
+      "details": {
+        "speed": 21,
+        "targets": [
+          21
+        ]
+      }
+    },
+    {
+      "name": "off cancels pending restore",
+      "pass": true,
+      "details": {
+        "power": 0,
+        "targets": [
+          0
+        ]
+      }
+    },
+    {
+      "name": "percent alone starts at target",
+      "pass": true,
+      "details": {
+        "targets": [
+          0,
+          43
+        ]
+      }
+    }
+  ],
+  "restored": {
+    "power": 0,
+    "speed": 0
+  },
+  "trace": [
+    "CLOUD_SPEED_RX ms=72294 command=on",
+    "SPEED_BURST ms=73790 register=fffc value=0",
+    "SPEED_BURST ms=74190 register=fff4 value=0",
+    "SPEED_BURST ms=74190 register=fff1 value=1",
+    "SPEED_BURST ms=74191 register=fff3 value=10",
+    "SPEED_APPLIED ms=76340 target=10 actual=10 power=1 ok=1",
+    "CLOUD_SPEED_RX ms=77244 command=off",
+    "SPEED_BURST ms=77840 register=fffc value=0",
+    "SPEED_BURST ms=77840 register=fff4 value=0",
+    "SPEED_BURST ms=77841 register=fff1 value=0",
+    "SPEED_APPLIED ms=78540 target=0 actual=0 power=0 ok=1",
+    "SPEED_BURST ms=79640 register=fffc value=0",
+    "SPEED_BURST ms=79640 register=fff4 value=0",
+    "SPEED_BURST ms=79641 register=fff1 value=1",
+    "SPEED_BURST ms=79641 register=fff3 value=1",
+    "SPEED_APPLIED ms=80190 target=1 actual=1 power=1 ok=1",
+    "CLOUD_SPEED_RX ms=80644 command=off",
+    "SPEED_BURST ms=80940 register=fffc value=0",
+    "SPEED_BURST ms=80940 register=fff4 value=0",
+    "SPEED_BURST ms=80940 register=fff1 value=0",
+    "SPEED_APPLIED ms=81890 target=0 actual=0 power=0 ok=1",
+    "CLOUD_SPEED_RX ms=82496 command=on",
+    "CLOUD_SPEED_RX ms=82560 command=on#43",
+    "SPEED_BURST ms=83140 register=fffc value=0",
+    "SPEED_BURST ms=83140 register=fff4 value=0",
+    "SPEED_BURST ms=83141 register=fff1 value=1",
+    "SPEED_BURST ms=83141 register=fff3 value=43",
+    "SPEED_APPLIED ms=84090 target=43 actual=43 power=1 ok=1",
+    "CLOUD_SPEED_RX ms=84745 command=off",
+    "SPEED_BURST ms=84840 register=fffc value=0",
+    "SPEED_BURST ms=84840 register=fff4 value=0",
+    "SPEED_BURST ms=84840 register=fff1 value=0",
+    "SPEED_APPLIED ms=85640 target=0 actual=0 power=0 ok=1",
+    "CLOUD_SPEED_RX ms=86346 command=on#10",
+    "SPEED_BURST ms=86540 register=fffc value=0",
+    "SPEED_BURST ms=86540 register=fff4 value=0",
+    "SPEED_BURST ms=86541 register=fff1 value=1",
+    "SPEED_BURST ms=86541 register=fff3 value=10",
+    "CLOUD_SPEED_RX ms=86609 command=on",
+    "CLOUD_SPEED_SUPPRESS companion on",
+    "SPEED_APPLIED ms=87540 target=10 actual=10 power=1 ok=1",
+    "SPEED_BURST ms=89040 register=fffc value=0",
+    "SPEED_BURST ms=89040 register=fff4 value=0",
+    "SPEED_BURST ms=89041 register=fff3 value=21",
+    "SPEED_APPLIED ms=90040 target=21 actual=21 power=1 ok=1",
+    "CLOUD_SPEED_RX ms=90546 command=off",
+    "SPEED_BURST ms=90690 register=fffc value=0",
+    "SPEED_BURST ms=90690 register=fff4 value=0",
+    "SPEED_BURST ms=90691 register=fff1 value=0",
+    "SPEED_APPLIED ms=91240 target=0 actual=0 power=0 ok=1",
+    "CLOUD_SPEED_RX ms=92094 command=on",
+    "SPEED_BURST ms=92990 register=fffc value=0",
+    "SPEED_BURST ms=92991 register=fff4 value=0",
+    "SPEED_BURST ms=92991 register=fff1 value=1",
+    "SPEED_BURST ms=92992 register=fff3 value=21",
+    "SPEED_APPLIED ms=93890 target=21 actual=21 power=1 ok=1",
+    "CLOUD_SPEED_RX ms=94846 command=off",
+    "SPEED_BURST ms=95340 register=fffc value=0",
+    "SPEED_BURST ms=95340 register=fff4 value=0",
+    "SPEED_BURST ms=95341 register=fff1 value=0",
+    "SPEED_APPLIED ms=96240 target=0 actual=0 power=0 ok=1",
+    "CLOUD_SPEED_RX ms=97045 command=on",
+    "CLOUD_SPEED_RX ms=97109 command=off",
+    "SPEED_BURST ms=97190 register=fffc value=0",
+    "SPEED_BURST ms=97191 register=fff4 value=0",
+    "SPEED_BURST ms=97191 register=fff1 value=0",
+    "SPEED_APPLIED ms=97690 target=0 actual=0 power=0 ok=1",
+    "CLOUD_SPEED_RX ms=98397 command=on#43",
+    "SPEED_BURST ms=98640 register=fffc value=0",
+    "SPEED_BURST ms=98640 register=fff4 value=0",
+    "SPEED_BURST ms=98641 register=fff1 value=1",
+    "SPEED_BURST ms=98641 register=fff3 value=43",
+    "SPEED_APPLIED ms=99540 target=43 actual=43 power=1 ok=1",
+    "SPEED_BURST ms=100940 register=fffc value=0",
+    "SPEED_BURST ms=100941 register=fff4 value=0",
+    "SPEED_BURST ms=100941 register=fff3 value=10",
+    "SPEED_APPLIED ms=101590 target=10 actual=10 power=1 ok=1",
+    "SPEED_BURST ms=102190 register=fffc value=0",
+    "SPEED_BURST ms=102190 register=fff4 value=0",
+    "SPEED_BURST ms=102190 register=fff1 value=0",
+    "SPEED_APPLIED ms=103040 target=0 actual=0 power=0 ok=1"
+  ]
+}

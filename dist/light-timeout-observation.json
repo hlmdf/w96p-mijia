@@ -1,0 +1,115 @@
+{
+  "baselineLight": 1,
+  "events": [
+    {
+      "elapsed": 0.275,
+      "line": "LIGHT_WRITE ms=60588 value=4"
+    },
+    {
+      "elapsed": 46.919,
+      "line": "LIGHT_WRITE ms=107231 value=1"
+    }
+  ],
+  "samples": [
+    {
+      "seconds": 0.0,
+      "light": 4,
+      "power": 0
+    },
+    {
+      "seconds": 2.21,
+      "light": 4,
+      "power": 0
+    },
+    {
+      "seconds": 4.44,
+      "light": 4,
+      "power": 0
+    },
+    {
+      "seconds": 6.68,
+      "light": 4,
+      "power": 0
+    },
+    {
+      "seconds": 8.91,
+      "light": 4,
+      "power": 0
+    },
+    {
+      "seconds": 11.39,
+      "light": 4,
+      "power": 0
+    },
+    {
+      "seconds": 13.66,
+      "light": 4,
+      "power": 0
+    },
+    {
+      "seconds": 15.88,
+      "light": 4,
+      "power": 0
+    },
+    {
+      "seconds": 18.16,
+      "light": 4,
+      "power": 0
+    },
+    {
+      "seconds": 20.41,
+      "light": 4,
+      "power": 0
+    },
+    {
+      "seconds": 22.69,
+      "light": 4,
+      "power": 0
+    },
+    {
+      "seconds": 24.95,
+      "light": 4,
+      "power": 0
+    },
+    {
+      "seconds": 27.2,
+      "light": 4,
+      "power": 0
+    },
+    {
+      "seconds": 29.43,
+      "light": 4,
+      "power": 0
+    },
+    {
+      "seconds": 31.73,
+      "light": 4,
+      "power": 0
+    },
+    {
+      "seconds": 34.14,
+      "light": 4,
+      "power": 0
+    },
+    {
+      "seconds": 36.36,
+      "light": 4,
+      "power": 0
+    },
+    {
+      "seconds": 38.58,
+      "light": 4,
+      "power": 0
+    },
+    {
+      "seconds": 40.86,
+      "light": 4,
+      "power": 0
+    },
+    {
+      "seconds": 43.58,
+      "light": 4,
+      "power": 0
+    }
+  ]
+}

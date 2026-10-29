@@ -1,0 +1,98 @@
+{
+  "checks": [
+    {
+      "name": "connect",
+      "ok": true,
+      "result": true
+    },
+    {
+      "name": "full USB curve request",
+      "ok": true,
+      "result": true
+    },
+    {
+      "name": "curve exact readback",
+      "ok": true,
+      "result": true
+    },
+    {
+      "name": "device info with acknowledged subscription",
+      "ok": true,
+      "result": {
+        "sn": "",
+        "version": "1.8"
+      }
+    },
+    {
+      "name": "fan off",
+      "ok": true,
+      "result": true
+    },
+    {
+      "name": "fan on and exact percent",
+      "ok": true,
+      "result": true
+    },
+    {
+      "name": "curve actual one-point change",
+      "ok": true,
+      "result": true
+    },
+    {
+      "name": "gear actual second-level change",
+      "ok": true,
+      "result": true
+    },
+    {
+      "name": "gear-down mode change",
+      "ok": true,
+      "result": true
+    }
+  ],
+  "restored": {
+    "fff1": {
+      "matches": true,
+      "hex": "01"
+    },
+    "fff3": {
+      "matches": true,
+      "hex": "0a"
+    },
+    "fffa": {
+      "matches": true,
+      "hex": "01"
+    },
+    "fff2": {
+      "matches": true,
+      "hex": "0000"
+    },
+    "fff4": {
+      "matches": true,
+      "hex": "00"
+    },
+    "fff5": {
+      "matches": true,
+      "hex": "012c"
+    },
+    "fff6": {
+      "matches": true,
+      "hex": "00"
+    },
+    "fff7": {
+      "matches": true,
+      "hex": "0a2b4664"
+    },
+    "fff8": {
+      "matches": true,
+      "hex": "00c7"
+    },
+    "fffb": {
+      "matches": true,
+      "hex": "0000"
+    },
+    "ffe3": {
+      "matches": true,
+      "hex": "373028211c16151a212930363a3c3d3a342d251e18141921283035393c3c38332b241d17151c252f383f44474847433e362e241d17141b2530394045494a4c4e50525456585a5957534d463e352b221b15141a20262b2f3132302c26211b1814151a1f252a2e302f2a241f1b1714161b21272c2f302e29241e1a1714161b2126"
+    }
+  }
+}

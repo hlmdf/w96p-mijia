@@ -1,0 +1,14 @@
+.pio/
+include/device_secret.h
+.downloads/
+tools/panel-script.js
+preview-profile/
+preview-profile-cdp/
+preview*.png
+framework-package.json
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+dist/*.stop

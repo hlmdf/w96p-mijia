@@ -1,0 +1,62 @@
+{
+  "baseline": {
+    "fff1": 0,
+    "fff3": 0,
+    "fffa": 1,
+    "fff2": 0,
+    "fff5": 0
+  },
+  "tests": [
+    {
+      "name": "BLE never-sleep confirmed",
+      "pass": true,
+      "result": true
+    },
+    {
+      "name": "automatic sleep rejected by online policy",
+      "pass": true,
+      "result": true
+    },
+    {
+      "name": "cloud fan off also turns light off",
+      "pass": true,
+      "result": true
+    },
+    {
+      "name": "BLE still readable after off",
+      "pass": true,
+      "result": true
+    },
+    {
+      "name": "independent light survives while motor off",
+      "pass": true,
+      "result": true
+    },
+    {
+      "name": "independent light off leaves motor running",
+      "pass": true,
+      "result": true
+    },
+    {
+      "name": "local power off also turns light off",
+      "pass": true,
+      "result": true
+    },
+    {
+      "name": "link loss automatically reconnects without a connect command",
+      "pass": true,
+      "result": true
+    },
+    {
+      "name": "native timer shutdown also turns light off",
+      "pass": true,
+      "result": true
+    }
+  ],
+  "restored": {
+    "fff1": 0,
+    "fff3": 0,
+    "fffa": 1,
+    "fff5": 0
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "id": 1,
+  "done": true,
+  "ok": true,
+  "hex": "",
+  "error": "",
+  "sn": "",
+  "version": "",
+  "diagnostic": "{\"apIP\":\"192.168.4.1\",\"apClients\":1,\"stationIP\":\"0.0.0.0\",\"wifiStatus\":6,\"freeHeap\":125740,\"httpConnected\":true,\"httpHeader\":\"HTTP/1.1 200 OK\\r\\nContent-Type: text/html; charset=utf-8\\r\\nCache-Control: no-store\\r\\nX-Content-Type-Options: nosniff\\r\\nX-Frame-Options: DENY\\r\\nContent-Length: 99196\\r\\nConnection: close\\r\\n\\r\\n\",\"receivedBodyBytes\":99196,\"expectedBodyBytes\":99196}"
+}
