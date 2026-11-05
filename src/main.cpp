@@ -6,6 +6,14 @@
 #include <Preferences.h>
 #include <PubSubClient.h>
 #include <ArduinoJson.h>
+#include <HTTPClient.h>
+#include <mbedtls/md.h>
+#include <mbedtls/sha256.h>
+#if __has_include("tuya_config.h")
+#include "tuya_config.h"
+#else
+#include "tuya_config.example.h"
+#endif
 #include <NimBLEDevice.h>
 #include "protocol.h"
 #include "panel.h"
@@ -23,6 +31,8 @@ static WiFiClientSecure tls;
 static PubSubClient mqtt(tls);
 static String uid,csrf;
 static QueueHandle_t queue;
+static QueueHandle_t sceneQueue;
+static volatile bool sceneResetPending=false;
 static SemaphoreHandle_t lock;
 static NimBLEClient *fan;
 static volatile bool bleConnected=false,allowReconnect=true;
@@ -308,7 +318,48 @@ static void getJob(){uint32_t id=web.arg("id").toInt();xSemaphoreTake(lock,portM
   StaticJsonDocument<1400>d;d["done"]=r.done;d["ok"]=r.ok;d["hex"]=r.hex;d["error"]=r.error;d["sn"]=r.sn;d["version"]=r.version;jsonReply(200,d);
 }
 static bool validUid(const String&s){if(s.length()!=32)return false;for(char c:s)if(hexDigit(c)<0)return false;return true;}
+
+static String hexBytes(const unsigned char *data,size_t len,bool upper){
+  const char *digits=upper?"0123456789ABCDEF":"0123456789abcdef";String result;result.reserve(len*2);
+  for(size_t i=0;i<len;i++){result+=digits[data[i]>>4];result+=digits[data[i]&15];}return result;
+}
+static String tuyaRequest(const char *method,const char *path,const String &accessToken){
+  if(WiFi.status()!=WL_CONNECTED||time(nullptr)<1700000000)return "";
+  struct timeval now;gettimeofday(&now,nullptr);char timestamp[24];snprintf(timestamp,sizeof(timestamp),"%lld",(long long)now.tv_sec*1000+now.tv_usec/1000);
+  unsigned char hash[32],mac[32];mbedtls_sha256((const unsigned char*)"",0,hash,0);
+  String canonical=String(method)+"\n"+hexBytes(hash,32,false)+"\n\n"+path;
+  String input=String(TUYA_ACCESS_ID)+accessToken+timestamp+canonical;
+  const mbedtls_md_info_t *md=mbedtls_md_info_from_type(MBEDTLS_MD_SHA256);
+  if(!md||mbedtls_md_hmac(md,(const unsigned char*)TUYA_ACCESS_SECRET,strlen(TUYA_ACCESS_SECRET),(const unsigned char*)input.c_str(),input.length(),mac))return "";
+  WiFiClientSecure client;client.setCACert(TUYA_ROOT_CA);client.setHandshakeTimeout(8);
+  HTTPClient http;http.setTimeout(10000);
+  if(!http.begin(client,String("https://")+TUYA_API_HOST+path))return "";
+  http.addHeader("client_id",TUYA_ACCESS_ID);http.addHeader("t",timestamp);http.addHeader("sign_method","HMAC-SHA256");http.addHeader("sign",hexBytes(mac,32,true));
+  if(accessToken.length())http.addHeader("access_token",accessToken);
+  int status;if(strcmp(method,"GET")==0)status=http.GET();else{http.addHeader("Content-Type","application/json");status=http.POST((uint8_t*)"",0);}
+  String response=http.getString();http.end();if(status<200||status>=300){Serial.printf("TUYA HTTP error %d\n",status);return "";}return response;
+}
+static void sceneWorker(void*){
+  uint8_t event;
+  for(;;){if(xQueueReceive(sceneQueue,&event,portMAX_DELAY)!=pdTRUE)continue;
+    if(strstr(TUYA_ACCESS_ID,"YOUR_")||strstr(TUYA_ACCESS_SECRET,"YOUR_")||strstr(TUYA_ROOT_CA,"YOUR_")){Serial.println("TUYA not configured");continue;}
+    String response=tuyaRequest("GET","/v1.0/token?grant_type=1","");DynamicJsonDocument doc(2048);
+    if(deserializeJson(doc,response)||!doc["success"].as<bool>()){Serial.println("TUYA token failed");continue;}
+    String token=doc["result"]["access_token"]|"";if(!token.length()){Serial.println("TUYA token missing");continue;}
+    response=tuyaRequest("POST","/v2.0/cloud/scene/rule/G8xIc7apXiFakhxU/actions/trigger",token);doc.clear();
+    if(deserializeJson(doc,response)||!doc["success"].as<bool>()||!doc["result"].as<bool>())Serial.println("TUYA scene failed or outcome unknown");
+    else Serial.println("TUYA scene accepted");
+  }
+}
 static void cloudMessage(char *topic,uint8_t *bytes,unsigned int n){
+  if(String(topic)=="rfbutton006"){
+    if((n==2&&bytes[0]=='o'&&bytes[1]=='n')||(n==3&&bytes[0]=='o'&&bytes[1]=='f'&&bytes[2]=='f')){
+      uint8_t event=1;
+      if(sceneQueue&&xQueueSend(sceneQueue,&event,0)==pdTRUE){sceneResetPending=true;Serial.println("TUYA button queued");}
+      else Serial.println("TUYA button queue full; event dropped");
+    }
+    return;
+  }
   if(n>16||!bleConnected)return;String s;for(unsigned i=0;i<n;i++)s+=char(bytes[i]);int v;if(!lampCommand(s,v))return;Job j;
   if(String(topic)==SPEED_TOPIC)Serial.printf("CLOUD_SPEED_RX ms=%lu command=%s\n",(unsigned long)millis(),s.c_str());
   if(String(topic)==LIGHT_TOPIC)Serial.printf("CLOUD_LIGHT_RX ms=%lu command=%s\n",(unsigned long)millis(),s.c_str());
@@ -325,8 +376,8 @@ static void cloudMessage(char *topic,uint8_t *bytes,unsigned int n){
 }
 static void cloudLoop(){
   if(!validUid(uid)||WiFi.status()!=WL_CONNECTED)return;static uint32_t lastTry=0,lastReport=0;
-  if(!mqtt.connected()){if(millis()-lastTry<15000)return;lastTry=millis();if(time(nullptr)<1700000000)return;if(mqtt.connect(uid.c_str())){mqtt.subscribe(SPEED_TOPIC);mqtt.subscribe(LIGHT_TOPIC);}return;}
-  mqtt.loop();if(millis()-lastReport<5000)return;lastReport=millis();xSemaphoreTake(lock,portMAX_DELAY);int s=actualSpeed,p=actualPower,l=actualLight;bool fresh=bleConnected&&stateAt&&millis()-stateAt<15000;xSemaphoreGive(lock);if(!fresh)return;
+  if(!mqtt.connected()){if(millis()-lastTry<15000)return;lastTry=millis();if(time(nullptr)<1700000000)return;if(mqtt.connect(uid.c_str())){mqtt.subscribe(SPEED_TOPIC);mqtt.subscribe(LIGHT_TOPIC);mqtt.subscribe("rfbutton006");}return;}
+  mqtt.loop();if(sceneResetPending&&mqtt.publish("rfbutton006/up","off"))sceneResetPending=false;if(millis()-lastReport<5000)return;lastReport=millis();xSemaphoreTake(lock,portMAX_DELAY);int s=actualSpeed,p=actualPower,l=actualLight;bool fresh=bleConnected&&stateAt&&millis()-stateAt<15000;xSemaphoreGive(lock);if(!fresh)return;
   if(s>=0&&s<=100&&p>=0){String msg=(p==0||s==0)?"off":"on#"+String(s);mqtt.publish((String(SPEED_TOPIC)+"/up").c_str(),msg.c_str());}
   if(l>=0&&l<=4){String msg=l==0?"off":"on#"+String(l*25);mqtt.publish((String(LIGHT_TOPIC)+"/up").c_str(),msg.c_str());}
 }
@@ -346,6 +397,7 @@ void setup(){
   web.on("/api/cloud",HTTP_POST,[]{if(!authorized())return;StaticJsonDocument<128>d;if(web.arg("plain").length()>128||deserializeJson(d,web.arg("plain"))){fail(400,"请求格式错误");return;}String value=d["uid"]|"";if(!validUid(value)){fail(400,"UID 应为 32 位十六进制私钥");return;}mqtt.disconnect();uid=value;prefs.putString("uid",uid);StaticJsonDocument<32>r;r["ok"]=true;jsonReply(200,r);});
   web.on("/api/wifi",HTTP_POST,[]{if(!authorized())return;StaticJsonDocument<256>d;if(web.arg("plain").length()>250||deserializeJson(d,web.arg("plain"))){fail(400,"请求格式错误");return;}String ssid=d["ssid"]|"",password=d["password"]|"";if(ssid.length()==0||ssid.length()>32||(password.length()!=0&&password.length()<8)||password.length()>63){fail(400,"请填写有效的名称和 Wi-Fi 密码");return;}StaticJsonDocument<32>r;r["ok"]=true;jsonReply(200,r);mqtt.disconnect();WiFi.persistent(true);WiFi.setAutoReconnect(true);WiFi.begin(ssid.c_str(),password.c_str());});
   web.onNotFound([]{fail(404,"地址不存在");});lock=xSemaphoreCreateMutex();queue=xQueueCreate(12,sizeof(Job));web.begin();
+  sceneQueue=xQueueCreate(16,sizeof(uint8_t));if(sceneQueue&&xTaskCreate(sceneWorker,"tuya",10000,nullptr,1,nullptr)!=pdPASS){vQueueDelete(sceneQueue);sceneQueue=nullptr;Serial.println("TUYA worker failed to start");}
   NimBLEDevice::init("W96P-C3-Bridge");NimBLEDevice::setMTU(247);xTaskCreate(worker,"w96ble",10000,nullptr,1,nullptr);
   Serial.printf("Panel: http://%s/\n",(WiFi.status()==WL_CONNECTED?WiFi.localIP():WiFi.softAPIP()).toString().c_str());
 }

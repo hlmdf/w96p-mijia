@@ -83,3 +83,14 @@ python -m platformio run
 
 `tools/preview.py` 仅在 127.0.0.1:8769 展示页面，所有控制请求均拒绝，绝不连接风扇。`tools/hardware_check.py --controls` 与 `tools/hardware_followup.py` 会实际操作风扇并恢复基线，不属于离线预览。USB 入口使用 `@` 开头的 JSON 行并调用同一个 BLE 队列；接收缓冲 2048 字节。`.pio/build/c3/firmware.bin` 和最终合并镜像须保持同一次构建；最终刷机包通过 esptool merge_bin 生成。当前分区不提供 OTA 更新入口。
 
+
+
+## 懒人开关：涂鸦一键场景
+
+固件订阅巴法 MQTT 主题 `rfbutton006`。收到 `on` 或 `off` 均排队执行一次涂鸦一键场景 `G8xIc7apXiFakhxU`，并向 `rfbutton006/up` 更新 `off`，该更新不广播。两种语音命令执行同一动作，不代表设备实际的开关状态。具体语音是否产生消息取决于小爱和巴法平台。
+
+将 `include/tuya_config.example.h` 复制为 `include/tuya_config.h`，在本地填写 Access ID、Access Secret 与地区主机名，然后编译烧录；不要提交真实凭据。默认主机为中国数据中心，内置 DigiCert Global Root G2，服务器更换证书链可能需要更新。请求不关闭 TLS 验证。Wi-Fi、巴法 UID 使用现有面板配置。涂鸦项目需具备场景调用权限。
+
+网络请求在独立任务处理，最多排队 16 个事件；队列满会丢弃新事件。MQTT QoS 0、断线、重启或 HTTP 超时可能导致事件丢失或执行结果不确定，不能保证恰好一次；超时后不自动重试，防止重复动作。云端成功不保证射频/红外设备实际执行。密码和密钥会存入固件，避免公开固件或配置。
+
+固件 2026-11-05 已在 C3 上编译、烧录并验证 Wi-Fi、巴法和风扇重连；用户确认语音“打开”能触发动作。新增的 `off` 路径已编译烧录，尚需用户现场确认。旧版预编译二进制不包含此功能，须自行构建。
